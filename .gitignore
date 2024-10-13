@@ -3,4 +3,5 @@
 **/*.rsf
 TTI*
 **/*.swp
-
+time.csv
+gpu_power.csv
