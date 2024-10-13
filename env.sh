@@ -9,7 +9,7 @@
 # icc 
 #source /home/intel/oneapi/compiler/latest/env/vars.sh
 
-export GCC=gcc
+export GCC=mpicc
 export OMP_FLAG=-fopenmp
 
 export OMP_NUM_THREADS=`lscpu | grep "^CPU(s):" | awk {'print $2'}`
