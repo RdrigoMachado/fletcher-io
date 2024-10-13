@@ -26,13 +26,13 @@ for round in $(seq 1 $((rounds))); do
         # echo "./${version}/ModelagemFletcher.exe TTI $size $size $size 16 12.5 12.5 12.5 0.001 $time"
         case "$version" in
         "original")
-          output=$(perf stat -e power/energy-pkg/ -x, -o /tmp/cpu_power.csv ./ModelagemFletcher.exe TTI $size $size $size 16 12.5 12.5 12.5 0.001 $time | grep "$version")
+          output=$(perf stat -e power/energy-pkg/ -x, -o /tmp/cpu_power.csv ./$version.exe TTI $size $size $size 16 12.5 12.5 12.5 0.001 $time | grep "$version")
           ;;
         "send_recv" | "isend_recv")
-          output=$(perf stat -e power/energy-pkg/ -x, -o /tmp/cpu_power.csv mpirun -np 2 ./ModelagemFletcher.exe TTI $size $size $size 16 12.5 12.5 12.5 0.001 $time | grep "$version")
+          output=$(perf stat -e power/energy-pkg/ -x, -o /tmp/cpu_power.csv mpirun -np 2 ./$version.exe TTI $size $size $size 16 12.5 12.5 12.5 0.001 $time | grep "$version")
           ;;
         "spawn_all_at_once" | "spawn_one_at_time")
-          output=$(perf stat -e power/energy-pkg/ -x, -o /tmp/cpu_power.csv mpirun -np 1 ./ModelagemFletcher.exe TTI $size $size $size 16 12.5 12.5 12.5 0.001 $time 4 | grep "$version")
+          output=$(perf stat -e power/energy-pkg/ -x, -o /tmp/cpu_power.csv mpirun -np 1 ./$version.exe TTI $size $size $size 16 12.5 12.5 12.5 0.001 $time 4 | grep "$version")
           ;;
         *)
           echo "Unknown version: $version"

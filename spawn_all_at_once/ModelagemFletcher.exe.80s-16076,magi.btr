@@ -1,7 +1,0 @@
-
-ModelagemFletcher.exe:16076 terminated with signal 11 at PC=77e4d2e4b783 SP=7ffca785f0e0.  Backtrace:
-/lib/x86_64-linux-gnu/libc.so.6(+0x4b783)[0x77e4d2e4b783]
-./ModelagemFletcher.exe(+0x2f4c)[0x605e37eb9f4c]
-/lib/x86_64-linux-gnu/libc.so.6(+0x29d90)[0x77e4d2e29d90]
-/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x80)[0x77e4d2e29e40]
-./ModelagemFletcher.exe(+0x3415)[0x605e37eba415]
