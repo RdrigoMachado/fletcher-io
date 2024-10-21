@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Number of times to repeat the each experiment
-rounds=10
+rounds=30
 
 # Array containing the sizes
 # init_size=216
@@ -10,7 +10,7 @@ init_size=504
 final_size=504
 sizes=(280 376 504)
 # Array containing the times
-times=(1.5)
+times=(0.5 1 1.5)
 
 # Array containing the versions
 versions=("original" "send_recv" "isend_recv" "spawn_all_at_once" "spawn_one_at_time")

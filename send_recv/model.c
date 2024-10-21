@@ -46,7 +46,7 @@ void Model(const int st, const int iSource, const float dtOutput, SlicePtr sPtr,
            const float dx, const float dy, const float dz, const float dt, const int it, 
 	   float * restrict pp, float * restrict pc, float * restrict qp, float * restrict qc,
 	   float * restrict vpz, float * restrict vsv, float * restrict epsilon, float * restrict delta,
-	   float * restrict phi, float * restrict theta, int absorb)
+	   float * restrict phi, float * restrict theta, int absorb, double send)
 {
 
   float tSim=0.0;
@@ -115,7 +115,9 @@ void Model(const int st, const int iSource, const float dtOutput, SlicePtr sPtr,
     if (tSim >= tOut) {
 
       DRIVER_Update_pointers(sx,sy,sz,pc);
+      const double send0=wtime();
       DumpSliceFile(sx,sy,sz,pc,sPtr);
+      send+=wtime()-send0;     
 
       tOut=(++nOut)*dtOutput;
 #ifdef _DUMP
@@ -157,9 +159,9 @@ void Model(const int st, const int iSource, const float dtOutput, SlicePtr sPtr,
   printf ("MSamples/s %.0lf\n", MSamples);
   printf ("Memory High Water Mark is %ld %s\n",HWM, HWMUnit);
 
-  printf("send_recv,%s,%d,%d,%d,%d,%.2f,%.2f,%.2f,%f,%f,%lu,%lu,%lf,%lf,%.0lf\n", 
+  printf("send_recv,%s,%d,%d,%d,%d,%.2f,%.2f,%.2f,%f,%f,%lu,%lu,%lf,%lf,%.0lf,%lf\n", 
           sPtr->fName, sx - 2*bord - 2*absorb, sy - 2*bord - 2*absorb, sz - 2*bord - 2*absorb, absorb, dx, dy, dz, dt, st*dt, 
-          stamp1, stamp2, walltime, execution_time, MSamples);
+          stamp1, stamp2, walltime, execution_time, MSamples, send);
 
   // concatenate all binary parts into a single file
 #if 0
