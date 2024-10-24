@@ -12,6 +12,6 @@ void Model(const int st, const int iSource, const float dtOutput, SlicePtr sPtr,
            const float dx, const float dy, const float dz, const float dt, const int it, 
 	   float * restrict pp, float * restrict pc, float * restrict qp, float * restrict qc,
 	   float * restrict vpz, float * restrict vsv, float * restrict epsilon, float * restrict delta,
-	   float * restrict phi, float * restrict theta, int absorb);
+	   float * restrict phi, float * restrict theta, int absorb, double send);
 
 #endif

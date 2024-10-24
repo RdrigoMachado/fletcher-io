@@ -45,7 +45,7 @@ void Model(const int st, const int iSource, const float dtOutput, SlicePtr sPtr,
            const float dx, const float dy, const float dz, const float dt, const int it, 
 	   float * restrict pp, float * restrict pc, float * restrict qp, float * restrict qc,
 	   float * restrict vpz, float * restrict vsv, float * restrict epsilon, float * restrict delta,
-	   float * restrict phi, float * restrict theta, int absorb)
+	   float * restrict phi, float * restrict theta, int absorb, double write)
 {
 
   float tSim=0.0;
@@ -113,9 +113,9 @@ void Model(const int st, const int iSource, const float dtOutput, SlicePtr sPtr,
 
       DRIVER_Update_pointers(sx,sy,sz,pc);
 
-      // double dd1 = wtime();
+      double write1 = wtime();
       DumpSliceFile_Nofor(sx,sy,sz,pc,sPtr);
-      // tdt+=wtime()-dd1;
+      write+=wtime()-write1;
 
       tOut=(++nOut)*dtOutput;
 #ifdef _DUMP
@@ -157,7 +157,7 @@ void Model(const int st, const int iSource, const float dtOutput, SlicePtr sPtr,
 
   printf("original,%s,%d,%d,%d,%d,%.2f,%.2f,%.2f,%f,%f,%lu,%lu,%lf,%lf,%.0lf\n", 
           sPtr->fName, sx - 2*bord - 2*absorb, sy - 2*bord - 2*absorb, sz - 2*bord - 2*absorb, absorb, dx, dy, dz, dt, st*dt, 
-          stamp1, stamp2, walltime, execution_time, MSamples);
+          stamp1, stamp2, walltime, execution_time, MSamples, write);
 
   // Dump Execution Metrics in CSV
   

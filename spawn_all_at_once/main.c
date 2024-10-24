@@ -291,7 +291,11 @@ int main(int argc, char** argv) {
   int qtdChilds=atof(argv[11]);
   MPI_inicializacao(sx, sy, sz, qtdChilds);
   
+  double send=0.0;
+  const double send0=wtime();
   DumpSliceFile(sx,sy,sz,pc,sPtr);
+  send+=wtime()-send0;
+
 #ifdef _DUMP
   DumpSlicePtr(sPtr);
   //  DumpSliceSummary(sx,sy,sz,sPtr,dt,it,pc,0);
@@ -310,7 +314,7 @@ int main(int argc, char** argv) {
         dx,     dy,      dz,       dt,   it, 
         pp,     pc,      qp,       qc,
 	vpz,    vsv,     epsilon,  delta,
-	phi,    theta, absorb);
+	phi,    theta, absorb, send);
 
   CloseSliceFile(sPtr);
 }
